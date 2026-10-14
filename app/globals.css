@@ -28,10 +28,10 @@ nav .count { margin-left:auto; }
 .sidebar-bottom .MuiTextField-root { width:100%; }
 .actor { display:flex; align-items:center; gap:8px; margin-top:16px; padding:16px 8px 0; border-top:1px solid var(--line); }
 .topbar { min-height:64px; padding:8px 32px; background:#FFF; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:16px; justify-content:space-between; }
-.breadcrumb { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--muted); min-width:0; }
+.breadcrumb { display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted); min-width:0; }
 .breadcrumb strong { font-weight:500; color:var(--ink); }
 .top-actions { display:flex; align-items:center; gap:16px; margin-left:auto; }
-.demo { font-size:12px; color:var(--muted); white-space:nowrap; }
+.demo { font-size:13px; color:var(--muted); white-space:nowrap; }
 .notification-dot { position:absolute; top:4px; right:4px; width:4px; height:4px; border-radius:50%; background:#80551B; }
 .mobile-role { display:none; }
 .page-heading .eyebrow { display:block; margin-bottom:8px; }
@@ -209,7 +209,6 @@ mark { padding:2px; border-radius:2px; background:#F8E4A6; outline:1px solid #D6
   .topbar { padding:8px 16px; min-height:64px; flex-wrap:wrap; }
   .breadcrumb { display:none; }
   .top-actions { gap:8px; }
-  .top-actions .avatar { display:none; }
   .mobile-role { max-width:168px; }
   .mobile-role .MuiNativeSelect-select { font-size:12px; }
   .issue-card { padding:16px; gap:8px; flex-wrap:wrap; }
