@@ -32,3 +32,7 @@ Eight domain tests cover real independent findings, immutable originals, depende
 ## MUI migration validation
 
 Material UI 9 replaces interface controls and overlay infrastructure; server data and tax-review rules remain the same. Browser workflow checks verify real adjustment and multiline verification saves, checkbox values, dialog focus trapping, nested Escape behavior, undo, table filters and bulk selection. A clipped native-select issue was corrected with scoped sizing styles. The complete eight-screen smoke check continues to pass.
+
+## Document layout regression checks
+
+Drawer source pages use normal document flow to prevent MUI flex shrinking from letting printed text overlap extracted fields. Long fields wrap on mobile. Source values follow their declared type, including mileage, percentages and Swedish currency. Geometry checks cover mileage pages, the corrected brokerage supplement, large sales records, wage and foreign statements at desktop, tablet and mobile widths, plus long-dialog scrolling on a short mobile screen.

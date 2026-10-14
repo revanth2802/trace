@@ -48,3 +48,12 @@ select.MuiNativeSelect-select{height:auto;min-height:38px;margin:0;border:0;bord
 .sidebar select.MuiNativeSelect-select{min-height:34px;margin:0}
 .mobile-role select.MuiNativeSelect-select{min-height:32px;margin:0;font-size:10px;padding:7px 25px 7px 9px}
 input.MuiInputBase-input:focus,select.MuiNativeSelect-select:focus,textarea.MuiInputBase-input:focus{outline:none}
+/* Drawer content must grow naturally: flex shrinking lets printed pages overlap fields. */
+.MuiDrawer-paper.drawer{display:block;overflow-y:auto;overflow-x:hidden}
+.field-row>span:not(.MuiTouchRipple-root){min-width:0;white-space:normal;overflow-wrap:anywhere}
+.field-row>span:first-child{flex:1 1 45%}
+.field-row>span:nth-child(2){flex:0 1 50%;text-align:right;white-space:normal}
+@media(max-width:560px){.MuiButton-root.field-row{flex-direction:column;align-items:stretch;gap:8px}.field-row>span:nth-child(2){text-align:left}.paper-heading strong{min-width:0}}
+/* These custom dialog bodies also scroll as one document rather than flex-shrinking. */
+.MuiDialog-paper.modal{display:block;overflow-y:auto}
+.document-card>.MuiButton-root{display:block;text-align:left}
