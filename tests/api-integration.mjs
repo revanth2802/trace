@@ -1,0 +1,10 @@
+import {request} from '@playwright/test';import assert from 'node:assert/strict';
+const client=await request.newContext({baseURL:'http://127.0.0.1:5173'});
+async function read(){const r=await client.get('/api/workpaper');assert.equal(r.status(),200);return r.json()}
+async function action(a,revision){const d=revision===undefined?await read():null;return client.post('/api/workpaper',{data:{...a,revision:revision??d.state.revision}})}
+await client.post('/api/workpaper',{data:{type:'switch',id:'st-01'}});let d=await read();assert.equal(d.packet.documents.length,74);assert.equal(d.packet.extracted_values.length,3012);
+const revision=d.state.revision;const concurrent=await Promise.all([action({type:'note',text:'Integration check A',blocking:false},revision),action({type:'note',text:'Integration check B',blocking:false},revision)]);assert.deepEqual(concurrent.map(r=>r.status()).sort(),[200,409]);console.log('Concurrent write guard verified');
+let r=await action({type:'adjust',key:'SchB.1.6',value:1871,category:'interest',reason:'Integration check: supplied 2025 rate'});assert.equal(r.status(),200);let result=await r.json();const adjustment=result.state.adjustments.at(-1);assert.equal(adjustment.original,1747);r=await action({type:'undo',id:adjustment.id});assert.equal(r.status(),200);d=await read();assert.equal(d.state.adjustments.at(-1).undone,true);console.log('Adjustment persistence and undo verified');
+await client.post('/api/workpaper',{data:{type:'switch',id:'client-joint'}});r=await action({type:'adjust',key:'SchB.1.6',value:1900,category:'interest',reason:'Unauthorized client action'});assert.equal(r.status(),400);d=await read();assert(!JSON.stringify(d.packet).includes('666-41-2287'));console.log('Server persona permission and masking verified');
+await client.post('/api/workpaper',{data:{type:'switch',id:'st-03'}});r=await action({type:'file'});assert.equal(r.status(),400);assert((await r.json()).error.includes('blockers'));console.log('API rejects filing with unresolved blockers');
+await client.post('/api/workpaper',{data:{type:'switch',id:'st-01'}});await client.dispose();
