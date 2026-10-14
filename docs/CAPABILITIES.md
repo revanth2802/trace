@@ -27,7 +27,7 @@
 
 ## Validation
 
-Eight domain tests cover real independent findings, immutable originals, dependent review invalidation, correct undo ordering, role restrictions, independent approvals, bulk undo, blocked filing, full signing/freezing/amendment lifecycle, and redaction. TypeScript and the production build pass. Browser checks cover all eight navigation sections, exact source tracing, restricted persona payloads and mobile role switching. Local API integration checks prove D1 persistence, compare-and-swap concurrency, role rejection and blocked filing.
+Eight domain tests cover real independent findings, immutable originals, dependent review invalidation, correct undo ordering, role restrictions, independent approvals, bulk undo, blocked filing, full signing/freezing/amendment lifecycle, and redaction. TypeScript and the production build pass. Browser checks cover all eight navigation sections, exact source tracing, restricted persona payloads and mobile role switching. Postgres integration tests check persistence, idempotent seeding, access logs, and rejection of stale and concurrent writes. Domain tests cover role rejection and blocked filing.
 
 ## MUI migration validation
 
