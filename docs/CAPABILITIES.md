@@ -36,3 +36,7 @@ Material UI 9 replaces interface controls and overlay infrastructure; server dat
 ## Document layout regression checks
 
 Drawer source pages use normal document flow to prevent MUI flex shrinking from letting printed text overlap extracted fields. Long fields wrap on mobile. Source values follow their declared type, including mileage, percentages and Swedish currency. Geometry checks cover mileage pages, the corrected brokerage supplement, large sales records, wage and foreign statements at desktop, tablet and mobile widths, plus long-dialog scrolling on a short mobile screen.
+
+## Interface polish
+
+The shared Inter/MUI theme establishes a readable typography hierarchy, restrained severity chips, 8px spacing, compact summary cards, numeric table alignment and distinct keyboard focus. Responsive layouts and mobile navigation preserve access to the review workflow. Automated accessibility scans pass for the main screens, figure drawer and verification dialog; long records support keyboard scrolling.

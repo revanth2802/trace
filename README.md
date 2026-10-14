@@ -1,6 +1,6 @@
 # Trace — tax review workspace
 
-A React/TypeScript app with Material UI 9, a custom shared theme, and the official Next.js App Router Emotion cache integration.
+A React/TypeScript app with Material UI 9, a shared Inter theme, and the official Next.js App Router Emotion cache integration.
 
 An evidence-first case-study prototype for the fictional Okafor–Lindqvist 2025 joint return. Loads the supplied JSON without changing its original records; review actions persist in Cloudflare D1.
 
@@ -37,6 +37,8 @@ This app simulates filing and signatures. It does not transmit to agencies. Adju
 
 ## UI architecture
 
-`app/providers.tsx` supplies the shared MUI theme and streaming style cache. `components/ui.tsx` adapts MUI buttons, fields, native selects, checkboxes, chips, panels and progress indicators to the workpaper’s form contracts. Evidence uses MUI Drawer; action forms use MUI Dialog with focus trapping and Escape handling. Tables use MUI Table and feedback uses Snackbar/Alert. Project CSS handles the application layout and document rendering.
+`lib/theme.ts` defines the design system; `app/providers.tsx` applies ThemeProvider, CssBaseline and the streaming style cache. Inter is self-hosted with Fontsource. `components/ui.tsx` adapts MUI buttons, fields, native selects, checkboxes, chips, panels and progress indicators to the workpaper’s form contracts. Evidence uses MUI Drawer; action forms use MUI Dialog with focus trapping and Escape handling. Tables use MUI Table and feedback uses Snackbar/Alert. Project CSS handles the application layout and document rendering.
 
 Run `node tests/browser-smoke.mjs` and `node tests/mui-workflows.mjs` against the local preview for interface checks. These browser scripts currently use the installed macOS Chrome executable.
+
+The design system is documented in `docs/DESIGN_SYSTEM.md`. `node tests/theme-review.mjs` checks typography, responsive layouts, keyboard focus and WCAG accessibility against the local preview.

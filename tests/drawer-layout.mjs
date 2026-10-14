@@ -1,7 +1,7 @@
 import {chromium,expect} from '@playwright/test';
 const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--no-sandbox']});
 const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
-await page.goto('http://127.0.0.1:5173/');await page.getByRole('heading',{name:'A clear path to a confident return.'}).waitFor();
+await page.goto('http://127.0.0.1:5173/');await page.getByRole('heading',{name:'2025 return overview'}).waitFor();
 await page.locator('nav').getByRole('button',{name:'Documents',exact:true}).click();
 async function openDocument(id){await page.getByRole('textbox',{name:'Search documents'}).fill(id);await Promise.all([page.waitForResponse(r=>r.url().endsWith('/api/workpaper')&&r.request().method()==='POST'),page.getByRole('button',{name:'Inspect',exact:true}).click()]);return page.getByRole('dialog',{name:'Source document'});}
 async function checkLayout(drawer,context){const geometry=await drawer.evaluate(el=>{const paper=el.querySelector('.document-paper'),text=el.querySelector('.printed-text'),fields=el.querySelector('.drawer-section');return {paperBottom:paper.getBoundingClientRect().bottom,textBottom:text.getBoundingClientRect().bottom,fieldsTop:fields.getBoundingClientRect().top,titleHeight:el.querySelector('.drawer-title').getBoundingClientRect().height,scrollWidth:el.scrollWidth,width:el.clientWidth};});if(geometry.textBottom>geometry.paperBottom||geometry.textBottom>geometry.fieldsTop)throw Error(context+': document overlaps fields');if(geometry.scrollWidth>geometry.width+1)throw Error(context+': drawer overflows horizontally');if(geometry.titleHeight<50)throw Error(context+': title collapsed');}
