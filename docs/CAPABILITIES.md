@@ -28,3 +28,7 @@
 ## Validation
 
 Eight domain tests cover real independent findings, immutable originals, dependent review invalidation, correct undo ordering, role restrictions, independent approvals, bulk undo, blocked filing, full signing/freezing/amendment lifecycle, and redaction. TypeScript and the production build pass. Browser checks cover all eight navigation sections, exact source tracing, restricted persona payloads and mobile role switching. Local API integration checks prove D1 persistence, compare-and-swap concurrency, role rejection and blocked filing.
+
+## MUI migration validation
+
+Material UI 9 replaces interface controls and overlay infrastructure; server data and tax-review rules remain the same. Browser workflow checks verify real adjustment and multiline verification saves, checkbox values, dialog focus trapping, nested Escape behavior, undo, table filters and bulk selection. A clipped native-select issue was corrected with scoped sizing styles. The complete eight-screen smoke check continues to pass.
