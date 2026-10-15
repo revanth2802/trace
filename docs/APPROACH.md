@@ -2,6 +2,18 @@
 
 Trace organizes a tax workpaper around evidence, uncertainty and accountability. The home screen answers: what does the return say, what needs attention, and what prevents filing? A figure opens a calculation and evidence drawer. Sources open simulated documents built from the packet’s actual printed_content, with page, field, read text and confidence. Missing extracted text is explicitly marked rather than presented as verified truth. The document index also shows reverse destinations and records exclusions.
 
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+    Packet["Original JSON packet"] --> API["Next.js server API and review rules"]
+    UI["React and MUI review interface"] -->|"Action and revision"| API
+    API -->|"Role-filtered response"| UI
+    API <-->|"Private connection through transaction pooler"| DB[("Supabase Postgres: review state and access logs")]
+```
+
+The browser uses the server API; database credentials stay on the server. The application runs on Vercel and deploys from GitHub. See the [architecture and data-model diagrams](ARCHITECTURE.md) for evidence relationships, physical tables, and the concurrent-save flow.
+
 The source packet remains unchanged. Return versions are immutable engine outputs. Reviewer actions live in a separate persisted workpaper: adjustments, verifications, review resolutions, questions and answers, judgments with authority, attachments, assignments, time entries, approvals, filing snapshots and audit events. An adjustment records original/effective values, actor, timestamp, reason and estimated federal/state effects. Dependent verifications and signatures reopen after a numeric change. The original filing snapshot survives an amendment.
 
 The data model has two Postgres tables. `workpapers` stores the household review aggregate and monotonic revision. `access_logs` independently records unmasked payload access. Every write checks the revision using an atomic compare-and-swap; stale writes are rejected and the client refreshes. Polling provides shared updates every 15 seconds. The role switcher uses a server-set HttpOnly cookie for case-study personas; the server applies permissions and redacts restricted responses. Reviewer access is configured at the deployment layer. Demo personas are intentionally selectable and are not production staff authentication.
